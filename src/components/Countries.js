@@ -3,8 +3,9 @@ import axios from "axios";
 import Card from "./Card";
 
 const Countries = () => {
+  const rangeValueInit=40;
   const [data, setData] = useState([]);
-  const [rangeValue, setRangeValue] = useState(40);
+  const [rangeValue, setRangeValue] = useState(rangeValueInit);
   const [selectedRadio, setSelectedRadio] = useState("");
   const radios = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
@@ -54,6 +55,7 @@ const Countries = () => {
         {data
           .filter((country) => country.region.includes(selectedRadio))
           .sort((a, b) => b.population - a.population)
+          .slice(0,rangeValue)
           .map((country) => (
             <Card country={country} key={country.name} />
           ))}
